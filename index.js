@@ -68,13 +68,13 @@ io.on('connection', function (socket) {
     });
 });
 
-// http.listen(process.env.port || process.env.PORT || 3978, function () {
-//     console.log("Connected");
-// });
-
-http.listen(3000, function () {
+http.listen(process.env.port || process.env.PORT || 3978, function () {
     console.log("Connected");
 });
+
+// http.listen(3000, function () {
+//     console.log("Connected");
+// });
 
 var weatherText;
 var locationId;
