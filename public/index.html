@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Modular Chat Bot</title>
+
+    <link rel="stylesheet" href="/public/css/normalize.css">
+    <link rel="stylesheet" href="/public/css/roboto.css">
+    <link rel="stylesheet" href="/public/css/font-awesome.min.css" />
+
+    <!-- jQuery UI Darkness Theme & Autocomplete -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/ui-darkness/jquery-ui.css">
+    <link rel="stylesheet prefetch" href="/public/css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- jQuery UI Darkness Theme & Autocomplete -->
+    <style>
+    .ui-datepicker {
+        width: 21%;
+    }
+    </style>
+    <script type="text/javascript">
+        var jQ = $.noConflict();
+    </script>
+    <script src="/public/js/validate.min.js"></script>
+</head>
+
+<body>
+    <div>.
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br> .
+        <br>
+    </div>
+    <div class="chatBot">
+        <div id="animHelpText" class="animated bounce" style="display: block;">We are glad to assist you !!</div>
+        <div class="chat">
+            <div class="chat-title">
+                <h1>Robo Advisor</h1>
+                <h2>Your Financial Advisor</h2>
+                <figure class="avatar">
+                    <img src="/public/aditya.png" alt="aditya logo">
+                </figure>
+                <button class="chat-minmax" id="minim-chat" style="display: none;"><i class="fa fa-minus fa-lg" aria-hidden="true"></i></button>
+                <button class="chat-minmax" id="maxi-chat"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></button>
+            </div>
+            <div class="messages">
+                <div class="messages-content"></div>
+            </div>
+            <div>
+                <form id="generalForm" class="message-box">
+                    <div id="sound"></div>
+                    <input id="userInputText" type="text" class="message-input">
+                    <button id="userInputSubmit" type="submit" class="message-submit">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="details" style="display: none;"></div>
+    <script type="text/javascript" src="/public/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/public/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "watson-bot",
+  "version": "1.0.0",
+  "description": "An example of IBM Watson Bot using Nodejs, express, socket.io & http server",
+  "dependencies": {
+    "browserify": "^13.1.1",
+    "express": "^4.10.2",
+    "path": "^0.12.7",
+    "request": "^2.79.0",
+    "socket.io": "^1.7.1",
+    "watson-developer-cloud": "^2.11.1"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "IBM",
+    "Watson",
+    "NodeJS",
+    "ChatBot",
+    "NLP"
+  ],
+  "author": "S.Vignesh, PanduRangaraj.B, Neetu.M",
+  "license": "ISC"
+}
