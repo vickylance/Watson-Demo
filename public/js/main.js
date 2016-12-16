@@ -38,7 +38,7 @@ function updateScrollbar() {
 }
 
 function playSound(filename) {
-	jQ('<audio autoplay="autoplay"><source src="' + filename + '.mp3" type="audio/mpeg" /><source src="' + filename + '.ogg" type="audio/ogg" /><embed hidden="true" autostart="true" loop="false" src="' + filename + '.mp3" /></audio>').appendTo(jQ('#sound'));
+	jQ('<audio autoplay="autoplay"><source src="/public/' + filename + '.mp3" type="audio/mpeg" /><source src="/public/' + filename + '.ogg" type="audio/ogg" /><embed hidden="true" autostart="true" loop="false" src="/public/' + filename + '.mp3" /></audio>').appendTo(jQ('#sound'));
 }
 
 function setTimeStamp(customTimeStamp) {
@@ -248,10 +248,13 @@ function generateRandomName() {
 	return randomName;
 }
 
+var pos = {};
+
 jQ(document).ready(function () {
 	msgsContainer.mCustomScrollbar();
 	displayBotMessage("Please Ask your Query!", 2000);
 	getLocation();
+	console.log('position is: ' + JSON.stringify(pos));
 });
 
 var socket = io();
@@ -270,13 +273,10 @@ socket.on('bot msg', function (msg) {
 });
 
 socket.on('get location', function () {
-	socket.emit('send location', position);
+	console.log('going to send position: ' + JSON.stringify(pos));
+	socket.emit('send location', pos);
 });
 
-var position = {
-	lat:"",
-	long:""
-};
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(getPosition);
@@ -286,7 +286,7 @@ function getLocation() {
 }
 
 function getPosition(position) {
-	console.log("lat: " + position.coords.latitude + " long: " + position.coords.longitude);
-    position.lat = position.coords.latitude;
-    position.long = position.coords.longitude;
+    pos.lat = position.coords.latitude;
+    pos.long = position.coords.longitude;
+	console.log("position: " + JSON.stringify(pos));
 }

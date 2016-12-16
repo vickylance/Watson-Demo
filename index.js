@@ -1,4 +1,5 @@
 var express = require('express');
+var session = require('express-session');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
@@ -9,16 +10,9 @@ var request = require('request');
 // console.log(". = %s", path.resolve("."));
 // console.log("__dirname = %s", path.resolve(__dirname));
 
-// var conversation = watson.conversation({
-//     username: process.env.USERNAME,
-//     password: process.env.PASSWORD,
-//     version: 'v1',
-//     version_date: '2016-09-20'
-// });
-
 var conversation = watson.conversation({
-    username: 'a5e6bf71-284f-4bcf-8f65-47c67d72a789',
-    password: 'JYQV1pPXwFl7',
+    username: process.env.USERNAME,
+    password: process.env.PASSWORD,
     version: 'v1',
     version_date: '2016-09-20'
 });
@@ -28,8 +22,7 @@ var context = {};
 
 function sendWatsonMsg(message, callback) {
     conversation.message({
-        // workspace_id: process.env.WORKSPACE,
-        workspace_id: 'e36eca52-0b97-4673-b1e8-8468d4b6373a',
+        workspace_id: process.env.WORKSPACE,
         input: {
             'text': message
         },
@@ -43,10 +36,11 @@ function sendWatsonMsg(message, callback) {
             if (typeof callback === "function") {
                 if (response.output.action !== null && response.output.action !== undefined && response.output.action !== '') {
                     callback(response.output.action);
+                } else {
+                    io.emit('bot msg', JSON.stringify(response.output.text.join(), null, 2));
+                    // io.emit('bot msg', JSON.stringify(context));
                 }
             }
-            io.emit('bot msg', JSON.stringify(response.output.text.join(), null, 2));
-            // io.emit('bot msg', JSON.stringify(context));
         }
     });
 }
@@ -54,7 +48,6 @@ function sendWatsonMsg(message, callback) {
 var pat = path.resolve(__dirname);
 
 app.use('/public', express.static('public'));
-// http.use(app.static(__dirname + '/public/'));
 app.get('/', function (req, res) {
     res.sendFile(pat + '/public/index.html');
 });
@@ -98,8 +91,6 @@ function executeAction(action) {
         case "climate":
             console.log('executing the climate');
             getLocation();
-            getWeatherText();
-            io.emit('bot msg', 'The climate is currently ' + weatherText);
             break;
         default:
             console.log('No action as ' + action + ' was found.');
@@ -109,30 +100,29 @@ function executeAction(action) {
 
 function getLocation() {
     io.emit('get location');
+    console.log('emiting get location');
 }
 
 function getLocationKey(lat, long) {
-    console.log('getting location key');
-    locationId = request.get('http://api.accuweather.com/locations/v1/cities/geoposition/search.json?q=' + lat + ',' + long + '&apikey=' + 'A2ZsFc5m1XsTWlN2SuRGbX2EVaj6cxjL')
-        .on('error', function (err) {
-            console.log('err: ' + err);
-        })
-        .on('response', function (response) {
-            console.log('response: ' + JSON.stringify(response));
-            return response.Key;
-        });
+    console.log('getting location key for lat: ' + lat + ' and long: ' + long);
+    request('http://apidev.accuweather.com/locations/v1/cities/geoposition/search.json?q=' + lat + ',' + long + '&apikey=' + process.env.ACCUWEATHER, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            locationId = JSON.parse(body).Key;
+            console.log('location id: ' + locationId);
+            getWeatherText();
+        }
+    });
 }
 
-
 function getWeatherText() {
-    weatherText = request.get('http://api.accuweather.com/currentconditions/v1/' + locationId + '.json?apikey=' + 'A2ZsFc5m1XsTWlN2SuRGbX2EVaj6cxjL')
-        .on('error', function (err) {
-            console.log('err1: ' + err);
-        })
-        .on('response', function (response) {
-            console.log('response1: ' + JSON.stringify(response));
-            return response.WeatherText;
-        });
+    console.log('http://apidev.accuweather.com/currentconditions/v1/' + locationId + '.json?apikey=' + process.env.ACCUWEATHER);
+    request('http://apidev.accuweather.com/currentconditions/v1/' + locationId + '.json?apikey=' + process.env.ACCUWEATHER, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log('weathertext = ' + JSON.stringify(JSON.parse(body)[0].WeatherText));
+            weatherText = JSON.parse(body)[0].WeatherText;
+            io.emit('bot msg', 'The climate is currently ' + weatherText);
+        }
+    });
 }
 
 // http://api.accuweather.com/locations/v1/cities/geoposition/search.json?q=40.59,-73.58&apikey={your key}

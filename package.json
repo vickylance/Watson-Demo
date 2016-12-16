@@ -5,6 +5,7 @@
   "dependencies": {
     "browserify": "^13.1.1",
     "express": "^4.10.2",
+    "express-session": "^1.14.2",
     "path": "^0.12.7",
     "request": "^2.79.0",
     "socket.io": "^1.7.1",
@@ -22,6 +23,10 @@
     "ChatBot",
     "NLP"
   ],
-  "author": "S.Vignesh, PanduRangaraj.B, Neetu.M",
+  "author": [
+    "Vignesh.S",
+    "PanduRengaraj.B",
+    "Neetu.M"
+  ],
   "license": "ISC"
 }
