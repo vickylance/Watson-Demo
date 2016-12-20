@@ -176,7 +176,7 @@ jQ("#minim-chat").click(function () {
 	setTimeoutID = setTimeout(function () {
 		jQ("#animHelpText").css("display", "block");
 	}, 1500);
-	ga('mini', 'minimize', 'click', 'minimize');
+	ga('send', 'event', 'click', 'mini', 'minimize');
 });
 jQ("#maxi-chat").click(function () {
 	jQ("#minim-chat").css("display", "block");
@@ -184,7 +184,7 @@ jQ("#maxi-chat").click(function () {
 	jQ(".chat").css("margin", "0");
 	jQ("#animHelpText").css("display", "none");
 	clearTimeout(setTimeoutID);
-	ga('max', 'maximise', 'click', 'maximise');
+	ga('send', 'event', 'click', 'max', 'maximise');
 });
 
 function getRandom(arrayResp) {
