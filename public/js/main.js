@@ -166,7 +166,7 @@ function formatAMPM(date) {
 	return strTime;
 }
 
-var setTimeoutID;
+var setTimeoutID, mini = 0, max = 0;
 jQ("#minim-chat").click(function () {
 	jQ("#minim-chat").css("display", "none");
 	jQ("#maxi-chat").css("display", "block");
@@ -176,6 +176,7 @@ jQ("#minim-chat").click(function () {
 	setTimeoutID = setTimeout(function () {
 		jQ("#animHelpText").css("display", "block");
 	}, 1500);
+	ga('send', 'event', 'click', 'mini', 'minimize', ++mini);
 });
 jQ("#maxi-chat").click(function () {
 	jQ("#minim-chat").css("display", "block");
@@ -183,6 +184,7 @@ jQ("#maxi-chat").click(function () {
 	jQ(".chat").css("margin", "0");
 	jQ("#animHelpText").css("display", "none");
 	clearTimeout(setTimeoutID);
+	ga('send', 'event', 'click', 'max', 'maximise', ++max);
 });
 
 function getRandom(arrayResp) {
