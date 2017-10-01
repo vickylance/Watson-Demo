@@ -1,11 +1,11 @@
-var express = require('express');
-var session = require('express-session');
-var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var watson = require('watson-developer-cloud');
-var path = require('path');
-var request = require('request');
+const express = require('express');
+const session = require('express-session');
+const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+const watson = require('watson-developer-cloud');
+const path = require('path');
+const request = require('request');
 
 // console.log(". = %s", path.resolve("."));
 // console.log("__dirname = %s", path.resolve(__dirname));
